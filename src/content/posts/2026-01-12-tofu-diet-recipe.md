@@ -325,4 +325,6 @@ image: "https://images.unsplash.com/photo-1722635940350-d1b2e5129379"
 
 👉 [알룰로스 보러가기](https://www.coupang.com/np/search?q=알룰로스&channel=user&sorter=scoreDesc&listSize=36&aid=AF2391197)
 
+---
+
 *이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.*
