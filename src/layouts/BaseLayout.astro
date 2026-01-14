@@ -22,7 +22,7 @@ const {
   slug
 } = Astro.props;
 
-const siteUrl = 'https://food-blog.pages.dev';
+const siteUrl = 'https://slimhanki-blog.pages.dev';
 const canonicalUrl = slug ? `${siteUrl}/posts/${slug}` : new URL(Astro.url.pathname, siteUrl).href;
 const ogImage = image || `${siteUrl}/og-default.jpg`;
 
