@@ -232,6 +232,41 @@ For in-character tips, use italics in a separate paragraph:
 
 ---
 
+### Article Layout: PC vs Mobile
+
+PC와 모바일에서 아티클 레이아웃이 다릅니다. 글 작성 및 스타일 수정 시 참고하세요.
+
+#### PC Version (768px+)
+- **Header Style**: Editorial Left (좌측 정렬)
+  - Category text (색상) + divider line + reading time
+  - Title (Playfair Display font, 2.4rem)
+  - Description
+  - Byline: "By K-Drama Kitchen · January 14, 2026"
+- **Hero Image**: 헤더 아래에 별도 표시
+- **Footer**: 가로 정렬 (Back link 좌측, Disclaimer 우측)
+
+#### Mobile Version (< 768px)
+- **Header Style**: Hero Image Overlay
+  - 전체 화면 이미지 위에 그라데이션 오버레이
+  - Category badge (배경색 있는 배지)
+  - Date + reading time
+  - Title (이미지 위에 흰색 텍스트)
+- **Hero Image**: 헤더와 통합 (오버레이)
+- **Footer**: 세로 정렬 + 가운데 정렬
+
+#### Category Colors (PC & Mobile)
+| Category | Color | Usage |
+|----------|-------|-------|
+| Romance | `#C62828` | PC: text color, Mobile: badge bg |
+| Thriller | `#4A148C` | Purple |
+| Comedy | `#EF6C00` | Orange |
+| Historical | `#5D4037` | Brown |
+| Action | `#D84315` | Deep Orange |
+| Comfort Food | `#8D6E63` | Warm Brown |
+| Street Food | `#00897B` | Teal |
+
+---
+
 ### Word Count & Quality Standards
 
 | Element | Requirement |
