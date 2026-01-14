@@ -108,6 +108,8 @@ const jsonLd = type === 'article' ? {
     gtag('js', new Date());
     gtag('config', 'G-N80YWVZHWX');
   </script>
+  <!-- Kakao SDK -->
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Ber8ya8" crossorigin="anonymous"></script>
 </head>
 <body>
   <header class="header">
@@ -323,9 +325,23 @@ const jsonLd = type === 'article' ? {
       }
     });
 
-    // 카카오톡 (Kakao SDK 없이 카카오스토리로 대체)
+    // 카카오톡 공유
+    if (window.Kakao && !Kakao.isInitialized()) {
+      Kakao.init('25afa0ad4ddbd574de6d4f473d8af79a');
+    }
     document.getElementById('share-kakao').addEventListener('click', () => {
-      window.open(`https://story.kakao.com/share?url=${encodeURIComponent(shareUrl)}`, '_blank', 'width=600,height=400');
+      if (window.Kakao) {
+        Kakao.Share.sendDefault({
+          objectType: 'feed',
+          content: {
+            title: shareTitle,
+            description: document.querySelector('meta[name="description"]')?.content || '맛있게 먹고, 날씬하게 사는 비밀',
+            imageUrl: document.querySelector('meta[property="og:image"]')?.content || 'https://slimhanki-blog.pages.dev/og-default.jpg',
+            link: { mobileWebUrl: shareUrl, webUrl: shareUrl },
+          },
+          buttons: [{ title: '자세히 보기', link: { mobileWebUrl: shareUrl, webUrl: shareUrl } }],
+        });
+      }
     });
   </script>
 
