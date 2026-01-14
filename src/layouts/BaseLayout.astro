@@ -172,7 +172,9 @@ const jsonLd = type === 'article' ? {
         <a href="/category/thriller" class={`nav-link ${currentPath.includes('thriller') ? 'active' : ''}`}>Thriller</a>
         <a href="/category/comedy" class={`nav-link ${currentPath.includes('comedy') ? 'active' : ''}`}>Comedy</a>
         <a href="/category/historical" class={`nav-link ${currentPath.includes('historical') ? 'active' : ''}`}>Historical</a>
-        <a href="/posts" class={`nav-link ${currentPath === '/posts' ? 'active' : ''}`}>All Recipes</a>
+        <a href="/category/action" class={`nav-link ${currentPath.includes('action') ? 'active' : ''}`}>Action</a>
+        <a href="/category/comfort-food" class={`nav-link ${currentPath.includes('comfort-food') ? 'active' : ''}`}>Comfort Food</a>
+        <a href="/category/street-food" class={`nav-link ${currentPath.includes('street-food') ? 'active' : ''}`}>Street Food</a>
         <div class="nav-search">
           <button class="search-toggle" id="search-toggle" aria-label="Search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
