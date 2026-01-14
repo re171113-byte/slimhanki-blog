@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://slimhanki-blog.pages.dev/sitemap.xml
+Sitemap: https://kdrama-kitchen.pages.dev/sitemap.xml

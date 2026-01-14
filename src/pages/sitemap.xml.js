@@ -3,12 +3,17 @@ import { getCollection } from 'astro:content';
 export async function GET() {
   const posts = await getCollection('posts');
   const allTags = [...new Set(posts.flatMap(post => post.data.tags))];
-  const site = 'https://slimhanki-blog.pages.dev';
+  const site = 'https://kdrama-kitchen.pages.dev';
 
   const staticPages = ['', '/about', '/contact', '/privacy', '/terms', '/posts'];
+  const categories = ['romance', 'action', 'comedy', 'historical', 'thriller', 'comfort-food', 'street-food'];
 
   let urls = staticPages.map(page =>
     '  <url><loc>' + site + page + '</loc></url>'
+  ).join('\n');
+
+  urls += '\n' + categories.map(cat =>
+    '  <url><loc>' + site + '/category/' + cat + '</loc></url>'
   ).join('\n');
 
   urls += '\n' + posts.map(post =>

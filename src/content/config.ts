@@ -10,7 +10,7 @@ const postsCollection = defineCollection({
     category: z.string(),
     tags: z.array(z.string()),
     image: z.string(),
-    author: z.string().optional().default('슬림한끼'),  // 작성자 (선택, 기본값: 슬림한끼)
+    author: z.string().optional().default('K-Drama Kitchen'),
   }),
 });
 
