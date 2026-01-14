@@ -1,0 +1,650 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Content Collections에서 포스트 가져오기
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .map(post => ({
+    slug: post.slug,
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.image + '?w=600',
+    category: post.data.category.replace(' 레시피', ''),
+    date: post.data.pubDate.replace(/-/g, '.')
+  }));
+
+// 추천 글: 최신 5개
+const recommendedPosts = posts.slice(0, 5);
+---
+
+<BaseLayout title="슬림한끼 - 맛있게 먹고, 날씬하게 사는 비밀">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-single">
+      {posts[0] && (
+        <a href={`/posts/${posts[0].slug}`} class="hero-main">
+          <img src={posts[0].image.replace('w=600', 'w=900')} alt={posts[0].title} />
+          <div class="overlay"></div>
+          <div class="content">
+            <span class="badge">NEW</span>
+            <h2>{posts[0].title}</h2>
+            <p>{posts[0].description}</p>
+          </div>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="main-wrapper">
+    <main>
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button class="category-tab active" data-category="전체">전체</button>
+        <button class="category-tab" data-category="저칼로리">저칼로리</button>
+        <button class="category-tab" data-category="K-다이어트">K-다이어트</button>
+        <button class="category-tab" data-category="단백질">단백질</button>
+        <button class="category-tab" data-category="간편식">간편식</button>
+        <button class="category-tab" data-category="밀프렙">밀프렙</button>
+        <button class="category-tab" data-category="다이어트 방법">다이어트 방법</button>
+      </div>
+
+      <!-- Section Header -->
+      <div class="section-header">
+        <h2 class="section-title">최신 글</h2>
+        <a href="/posts">전체보기 →</a>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="posts-grid" id="posts-grid">
+        {posts.map((post) => (
+          <article class="post-card" data-category={post.category}>
+            <a href={`/posts/${post.slug}`}>
+              <div class="image">
+                <img src={post.image} alt={post.title} loading="lazy" />
+                <span class="badge">{post.category}</span>
+              </div>
+              <div class="content">
+                <h3>{post.title}</h3>
+                <p>{post.description}</p>
+                <div class="meta">
+                  <span>{post.date}</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- 추천 글 -->
+      <div class="sidebar-section">
+        <h4>✨ 추천 글</h4>
+        {recommendedPosts.map((post, index) => (
+          <a href={`/posts/${post.slug}`} class="popular-item">
+            <span class={`rank ${index < 3 ? 'top' : ''}`}>{index + 1}</span>
+            <div class="info">
+              <h5>{post.title}</h5>
+              <span>{post.category}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-section">
+        <h4>🏷️ 태그</h4>
+        <div class="tags-cloud">
+          <a href="/tag/다이어트" class="tag">#다이어트</a>
+          <a href="/tag/저칼로리" class="tag">#저칼로리</a>
+          <a href="/tag/단백질" class="tag">#단백질</a>
+          <a href="/tag/두부 다이어트" class="tag">#두부</a>
+          <a href="/tag/닭가슴살 레시피" class="tag">#닭가슴살</a>
+          <a href="/tag/밀프렙" class="tag">#밀프렙</a>
+          <a href="/tag/저탄고지" class="tag">#저탄고지</a>
+          <a href="/tag/건강식" class="tag">#건강식</a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.category-tab');
+    const posts = document.querySelectorAll('.post-card');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const category = tab.dataset.category;
+        posts.forEach(post => {
+          const postCategory = post.dataset.category;
+          if (category === '전체' || postCategory === category) {
+            post.style.display = 'block';
+          } else {
+            post.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+</BaseLayout>
+
+<style>
+  /* ==================== HERO ==================== */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 24px;
+  }
+
+  .hero-single {
+    display: block;
+  }
+
+  .hero-single .hero-main {
+    height: 480px;
+    max-width: 100%;
+  }
+
+  .hero-main {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 420px;
+    display: block;
+  }
+
+  .hero-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-main .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 40%, transparent 70%);
+  }
+
+  .hero-main .content {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    color: #fff;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+
+  .hero-main h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-main p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hero-side-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 1;
+    display: block;
+  }
+
+  .hero-side-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-side-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+  }
+
+  .hero-side-item .content {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    right: 18px;
+    color: #fff;
+  }
+
+  .hero-side-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* ==================== MAIN WRAPPER ==================== */
+  .main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+  }
+
+  /* Category Tabs */
+  .category-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .category-tab {
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .category-tab:hover {
+    border-color: var(--text-tertiary);
+    color: var(--text-primary);
+  }
+
+  .category-tab.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+  }
+
+  /* Section Header */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .section-header a {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .section-header a:hover {
+    color: var(--accent);
+  }
+
+  /* Posts Grid */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .post-card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .post-card a {
+    display: block;
+  }
+
+  .post-card .image {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+  }
+
+  .post-card .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .post-card:hover .image img {
+    transform: scale(1.05);
+  }
+
+  .post-card .image .badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--text-primary);
+  }
+
+  .post-card .content {
+    padding: 22px;
+  }
+
+  .post-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .post-card .meta .stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  /* ==================== SIDEBAR ==================== */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .sidebar-section {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 26px;
+    border: 1px solid var(--border);
+  }
+
+  .sidebar-section h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-section h4::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    margin-left: 8px;
+  }
+
+  /* Popular Posts */
+  .popular-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .popular-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .popular-item:first-of-type {
+    padding-top: 0;
+  }
+
+  .popular-item .rank {
+    width: 28px;
+    height: 28px;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .popular-item .rank.top {
+    background: var(--accent);
+  }
+
+  .popular-item .info h5 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .popular-item .info span {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  /* Tags */
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    padding: 8px 14px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+  }
+
+  /* ==================== CTA SECTION ==================== */
+  .cta-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  .cta-box {
+    background: linear-gradient(135deg, var(--text-primary) 0%, #3a3a3a 100%);
+    border-radius: 20px;
+    padding: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    opacity: 0.1;
+    border-radius: 50%;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-content h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .cta-content p {
+    font-size: 1rem;
+    color: var(--text-tertiary);
+  }
+
+  .cta-button {
+    position: relative;
+    z-index: 1;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(160, 128, 96, 0.4);
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 1024px) {
+    .main-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-main {
+      height: 300px;
+    }
+
+    .hero-single .hero-main {
+      height: 350px;
+    }
+
+    .hero-side {
+      flex-direction: row;
+    }
+
+    .hero-side-item {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-single .hero-main {
+      height: 280px;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-side {
+      flex-direction: column;
+    }
+
+    .hero-side-item {
+      height: 180px;
+    }
+
+    .cta-box {
+      flex-direction: column;
+      text-align: center;
+      gap: 32px;
+      padding: 40px 24px;
+    }
+  }
+</style>

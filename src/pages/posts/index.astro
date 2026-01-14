@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .map(post => ({
+    slug: post.slug,
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.image + '?w=600',
+    category: post.data.category.replace(' 레시피', ''),
+    date: post.data.pubDate.replace(/-/g, '.'),
+    tags: post.data.tags
+  }));
+
+const POSTS_PER_PAGE = 10;
+const currentPage = 1;
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+const paginatedPosts = posts.slice(0, POSTS_PER_PAGE);
+---
+
+<BaseLayout title="전체 글 - 슬림한끼" description="슬림한끼의 모든 다이어트 레시피와 건강식 정보">
+  <div class="posts-page">
+    <div class="posts-header">
+      <h1>전체 글</h1>
+      <p>총 {posts.length}개의 글</p>
+    </div>
+
+    <div class="posts-list">
+      {posts.map((post) => (
+        <article class="post-item">
+          <a href={`/posts/${post.slug}`}>
+            <div class="post-image">
+              <img src={post.image} alt={post.title} loading="lazy" />
+            </div>
+            <div class="post-info">
+              <div class="post-meta">
+                <span class="category">{post.category}</span>
+                <span class="date">{post.date}</span>
+              </div>
+              <h2>{post.title}</h2>
+              <p>{post.description}</p>
+              <div class="tags">
+                {post.tags.slice(0, 3).map((tag) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .posts-page { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+  .posts-header { text-align: center; margin-bottom: 48px; }
+  .posts-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+  .posts-header p { color: var(--text-tertiary); }
+  .posts-list { display: flex; flex-direction: column; gap: 24px; }
+  .post-item { background: var(--bg-card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .post-item:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+  .post-item a { display: flex; gap: 24px; }
+  .post-image { width: 280px; flex-shrink: 0; aspect-ratio: 16/10; overflow: hidden; }
+  .post-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .post-item:hover .post-image img { transform: scale(1.05); }
+  .post-info { flex: 1; padding: 24px 24px 24px 0; display: flex; flex-direction: column; justify-content: center; }
+  .post-meta { display: flex; gap: 12px; margin-bottom: 12px; }
+  .category { background: var(--accent); color: #fff; padding: 4px 10px; font-size: 0.75rem; font-weight: 600; }
+  .date { color: var(--text-tertiary); font-size: 0.85rem; }
+  .post-info h2 { font-size: 1.2rem; font-weight: 600; line-height: 1.5; margin-bottom: 8px; color: var(--text-primary); }
+  .post-info p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { font-size: 0.8rem; color: var(--text-tertiary); }
+  @media (max-width: 768px) { .post-item a { flex-direction: column; } .post-image { width: 100%; } .post-info { padding: 20px; } }
+</style>
