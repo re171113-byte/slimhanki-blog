@@ -51,6 +51,39 @@ const author = {
   bio: '다이어트 식단 큐레이터',
   description: '다이어트 정보, 보기 쉽게 정리했습니다.'
 };
+// FAQ 파싱 함수 (### Q. 또는 ### Q1. 형식 모두 지원)
+function parseFAQs(body: string): Array<{question: string, answer: string}> {
+  const faqs: Array<{question: string, answer: string}> = [];
+  const faqSectionMatch = body.match(/## 자주 묻는 질문[\s\S]*?(?=\n## |$)/);
+  if (!faqSectionMatch) return faqs;
+  const faqSection = faqSectionMatch[0];
+  const qaPattern = /### Q\d*\. (.+?)\n\n([^#]+?)(?=\n### |$)/g;
+  let match;
+  while ((match = qaPattern.exec(faqSection)) !== null) {
+    const question = match[1].trim();
+    const answer = match[2].trim().replace(/\n+/g, ' ');
+    if (question && answer) {
+      faqs.push({ question, answer });
+    }
+  }
+  return faqs;
+}
+
+// FAQ 데이터 추출 및 스키마 생성
+const faqs = parseFAQs(post.body);
+const faqSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+} : null;
+
 ---
 
 <BaseLayout
@@ -73,6 +106,10 @@ const author = {
       { "@type": "ListItem", "position": 3, "name": post.data.title }
     ]
   })} />
+  <!-- FAQ JSON-LD (검색결과 확장) -->
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
 
   <div class="post-wrapper">
     <article class="post-detail">
@@ -85,7 +122,20 @@ const author = {
         </ol>
       </nav>
 
-      <div class="post-header">
+      <!-- 모바일: 히어로 이미지 + 오버레이 -->
+      <div class="post-hero-mobile">
+        <img src={post.data.image} alt={post.data.title} class="hero-image" />
+        <div class="hero-overlay">
+          <div class="hero-meta">
+            <span class="hero-category">{post.data.category}</span>
+            <span class="hero-date">{post.data.pubDate} · 약 {readingTime}분</span>
+          </div>
+          <h1 class="hero-title">{post.data.title}</h1>
+        </div>
+      </div>
+
+      <!-- PC: 기존 헤더 -->
+      <div class="post-header-pc">
         <div class="post-meta">
           <span class="category">{post.data.category}</span>
           <span class="meta-divider">·</span>
@@ -106,7 +156,8 @@ const author = {
         </div>
       </div>
 
-      <div class="post-hero">
+      <!-- PC: 히어로 이미지 -->
+      <div class="post-hero-pc">
         <img src={post.data.image} alt={post.data.title} />
       </div>
 
@@ -292,6 +343,94 @@ const author = {
     text-overflow: ellipsis;
   }
 
+  /* ==================== 모바일 히어로 (개선안 B) ==================== */
+  .post-hero-mobile {
+    display: none; /* 기본: 숨김, 모바일에서만 표시 */
+  }
+
+  @media (max-width: 768px) {
+    .post-hero-mobile {
+      display: block;
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 0;
+      margin: 0 -24px 32px -24px; /* wrapper padding 상쇄 */
+    }
+
+    .post-hero-mobile .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-hero-mobile .hero-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
+      padding: 60px 20px 24px;
+    }
+
+    .post-hero-mobile .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .post-hero-mobile .hero-category {
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .post-hero-mobile .hero-date {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+    }
+
+    .post-hero-mobile .hero-title {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* PC 요소 숨김 */
+    .post-header-pc {
+      display: none;
+    }
+
+    .post-hero-pc {
+      display: none;
+    }
+  }
+
+  /* PC: 기존 헤더 표시 */
+  .post-header-pc {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .post-hero-pc {
+    margin-bottom: 48px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .post-hero-pc img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .post-header {
     text-align: center;
     margin-bottom: 40px;
@@ -378,17 +517,6 @@ const author = {
     color: var(--text-secondary);
   }
 
-  .post-hero {
-    margin-bottom: 48px;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .post-hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
 
   .post-content {
     font-size: 1.05rem;

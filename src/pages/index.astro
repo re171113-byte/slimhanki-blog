@@ -620,8 +620,42 @@ const recommendedPosts = posts.slice(0, 5);
   }
 
   @media (max-width: 768px) {
+    /* 메인 히어로 - 강화된 그라데이션 (Option B) */
+    .hero {
+      padding: 0;
+    }
+
     .hero-single .hero-main {
-      height: 280px;
+      height: 320px;
+      border-radius: 0;
+    }
+
+    .hero-main .overlay {
+      inset: auto 0 0 0; /* 하단에만 배치 */
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
+    }
+
+    .hero-main .content {
+      bottom: 24px;
+      left: 20px;
+      right: 20px;
+    }
+
+    .hero-main .badge {
+      font-size: 10px;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+    }
+
+    .hero-main h2 {
+      font-size: 20px;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+    /* 모바일에서 설명 숨김 - 제목만 표시 */
+    .hero-main p {
+      display: none;
     }
 
     .posts-grid {
