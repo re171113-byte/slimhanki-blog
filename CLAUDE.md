@@ -1,356 +1,381 @@
-# 슬림한끼 - 수익형 음식 블로그 PRD
+# K-Drama Kitchen - Project Guide
 
-> **최종 업데이트**: 2026-01-14
-> **목표**: SEO 최적화 + 고품질 콘텐츠 + 수익화 완성
-
----
-
-## 프로젝트 개요
-
-| 항목 | 내용 |
-|------|------|
-| **사이트명** | 슬림한끼 |
-| **도메인** | slimhanki-blog.pages.dev |
-| **주제** | 다이어트/건강식 레시피 |
-| **기술 스택** | Astro 4.x + TypeScript |
-| **수익 모델** | Google AdSense + 쿠팡 파트너스 |
-| **타겟** | 다이어트에 관심 있는 한국인 |
+> **Last Updated**: 2026-01-15
+> **Goal**: Premium K-Drama food magazine with SEO optimization + monetization
 
 ---
 
-## 현재 완료 상태 ✅
+## Project Overview
 
-### 콘텐츠 (100% 완료)
-- [x] 30개 글 작성 (8,000~9,000자)
-- [x] Unsplash 이미지 3개/글
-- [x] 내부 링크 5~10개/글
-- [x] FAQ 9개/글
-- [x] 개인 경험담 도입부
-
-### 페이지 구조 (100% 완료)
-- [x] 메인 페이지 (`/`)
-- [x] 글 상세 페이지 (`/posts/[slug]`)
-- [x] 글 목록 페이지 (`/posts`)
-- [x] 카테고리 페이지 (`/category/[slug]`)
-- [x] 태그 페이지 (`/tag/[tag]`)
-- [x] 소개 페이지 (`/about`)
-- [x] 연락처 페이지 (`/contact`)
-- [x] 개인정보처리방침 (`/privacy`)
-
-### SEO 기본 (80% 완료)
-- [x] sitemap.xml 자동 생성
-- [x] robots.txt
-- [x] RSS 피드 (`/rss.xml`)
-- [x] 메타 태그 (title, description, og:image)
-- [x] H2/H3 구조화
-- [x] 이미지 alt 텍스트
-
-### 기능 (70% 완료)
-- [x] 검색 (Fuse.js)
-- [x] 카테고리 필터링
-- [x] 관련 글 추천
-- [x] 반응형 디자인
-- [x] 이미지 지연 로딩
+| Item | Details |
+|------|---------|
+| **Site Name** | K-Drama Kitchen |
+| **Domain** | kdrama-kitchen.pages.dev |
+| **Concept** | Korean drama food recipes & culture magazine |
+| **Tech Stack** | Astro 4.x + TypeScript |
+| **Revenue** | Google AdSense + Affiliate links |
+| **Target** | International K-Drama fans who love Korean food |
+| **Language** | English |
 
 ---
 
-## 작업 목록 (TODO)
+## Brand Identity
 
-### 1단계: 수익화 활성화 🔥 [긴급]
+### Tagline
+**"Cook What You Watch"**
 
-> 수익 창출을 위한 필수 작업
+### Voice & Tone
+- **Editorial**: Magazine-style storytelling, not blog-style info dumps
+- **Cinematic**: Describe scenes vividly, make readers feel the drama
+- **Cultural**: Explain Korean food culture with depth and respect
+- **Inviting**: Warm but sophisticated, like a trusted friend who knows food
 
-| # | 작업 | 상태 | 파일/위치 | 설명 |
-|---|------|------|-----------|------|
-| 1.1 | ads.txt 생성 | ⏳ | `/public/ads.txt` | AdSense 게시자 인증 |
-| 1.2 | Google Analytics 추가 | ✅ | `BaseLayout.astro` | GA4 추적 코드 (G-N80YWVZHWX) |
-| 1.3 | AdSense 광고 블록 | ⏳ | `BaseLayout.astro`, 글 페이지 | 4곳 배치 |
-| 1.4 | 파비콘 추가 | ✅ | `/public/favicon.svg` | 브랜드 아이콘 |
-| 1.5 | 쿠팡 링크 교체 | ✅ | 30개 글 (~100개 링크) | 텍스트 기반 자동 생성 |
+### What We Are NOT
+- ❌ Diet/health blog (no calorie counting, no "healthy alternatives")
+- ❌ Simple recipe aggregator (no "5 easy steps" clickbait)
+- ❌ Korean language content (English only)
+- ❌ Generic food blog (every recipe connects to a K-Drama)
 
-**광고 배치 계획**:
+---
+
+## Content Structure
+
+### Categories (Drama Genres)
+| Category | Slug | Description |
+|----------|------|-------------|
+| Romance | `/category/romance` | Love stories, heart-fluttering food moments |
+| Thriller | `/category/thriller` | Suspenseful dramas, comfort food contrasts |
+| Comedy | `/category/comedy` | Light-hearted shows, fun and quirky dishes |
+| Historical | `/category/historical` | Sageuk dramas, traditional Korean cuisine |
+| Action | `/category/action` | Fast-paced shows, bold flavors |
+| Comfort Food | `/category/comfort-food` | Emotional eating scenes |
+| Street Food | `/category/street-food` | Pojangmacha scenes, casual eats |
+
+### Content Pillars
+1. **Drama Recipe Posts** - Main content (80%)
+2. **Culture Deep Dives** - Korean food culture articles (15%)
+3. **Guides** - "Best K-Drama Foods" compilations (5%)
+
+---
+
+## Article Writing Guidelines
+
+### Magazine Style Rules
+
+#### 1. Opening Hook (The Scene)
+Never start with "Today we'll learn about..."
+
+**DO THIS:**
 ```
-위치 1: 히어로 섹션 아래 (728x90 리더보드)
-위치 2: 글 본문 중간 (인아티클 광고 2-3개)
-위치 3: 사이드바 상단 (300x250 고정)
-위치 4: 푸터 위 (728x90 리더보드)
+It's late. The clock reads 2:47 AM, and you're four episodes deep
+into Crash Landing on You. Your eyes are tired, but you can't stop.
+
+Then it happens.
+
+Captain Ri stands in his modest kitchen, steam rising from a
+battered aluminum pot. He cracks an egg into bubbling broth...
+```
+
+**NOT THIS:**
+```
+Today we're going to learn how to make ramyeon from the popular
+Korean drama Crash Landing on You. This recipe is simple and
+delicious...
+```
+
+#### 2. Cultural Context Section
+After the hook, explain WHY this food matters:
+- What does it mean in Korean culture?
+- Why did the drama use this food in this scene?
+- What emotions does it evoke?
+
+#### 3. Recipe Section
+Clear, practical instructions:
+- Ingredient list with alternatives
+- Step-by-step with timing
+- Pro tips from Korean home cooks
+- Common mistakes to avoid
+
+#### 4. The Epilogue
+End with emotion, not "enjoy your meal":
+```
+It's now 3:15 AM. Your pot is empty, the broth drunk down to the
+last drop. Tomorrow, you might try something elaborate. But tonight,
+you made ramyeon. And that was exactly enough.
+```
+
+### Article Structure Template
+
+```markdown
+---
+title: "[Drama Name] [Food Name] - [Catchy Subtitle]"
+description: "150 characters meta description with drama name + food"
+pubDate: "YYYY-MM-DD"
+category: "Romance|Thriller|Comedy|Historical|Action"
+tags: ["Drama Name", "Food Name", "Korean Food", "K-Drama Recipe"]
+image: "https://images.unsplash.com/photo-xxx"
+---
+
+[HOOK: 2-3 paragraphs describing the drama scene cinematically]
+
+---
+
+## The Scene That Made Us Hungry
+[Context about the specific episode/scene]
+
+![Image with caption](url)
+*Caption describing the image*
+
+---
+
+## Understanding [Food Name]: More Than Just [Simple Description]
+[Cultural deep dive - 3-4 paragraphs]
+
+| Aspect | Meaning |
+|--------|---------|
+| [Element] | [Cultural significance] |
+
+---
+
+## The Recipe: [Character]'s [Food Name]
+
+### Ingredients
+
+**Essential**
+- Item 1
+- Item 2
+
+**Optional Upgrades**
+- Item 1
+- Item 2
+
+### Equipment
+- Item 1
+- Item 2
+
+---
+
+## Step-by-Step Instructions
+
+### Step 1: [Action Name]
+[Instructions with cultural notes in italics]
+
+*[Character] Note: [In-character tip]*
+
+### Step 2: [Action Name]
+[Continue...]
+
+![Progress image](url)
+*Caption*
+
+---
+
+## Pro Tips from Korean Home Cooks
+
+### The [Tip Name]
+[Explanation]
+
+### The [Tip Name]
+[Explanation]
+
+---
+
+## FAQ
+
+### Q1. [Question about the drama/food]?
+[Answer with personality]
+
+### Q2. [Question]?
+[Answer]
+
+[Continue for 5-7 FAQs]
+
+---
+
+## The Last Word
+[Emotional epilogue - 2-3 paragraphs bringing it back to the drama/feeling]
+
+---
+
+*This recipe is part of our K-Drama Kitchen series...*
+```
+
+### Markdown Formatting Rules
+
+#### Italic Text (Emphasis)
+Use `*text*` for:
+- **Drama titles**: *Crash Landing on You*, *Goblin*, *Vincenzo*
+- **Korean words**: *ramyeon*, *ttukbaegi*, *meokgo gallae*
+- **Foreign terms**: *al dente*, *mise en place*
+
+```markdown
+You're four episodes deep into *Crash Landing on You*.
+Use a traditional Korean *ttukbaegi* (earthenware pot).
+```
+
+#### Image Captions
+Place caption **immediately after** the image on the same line or next line:
+
+```markdown
+![Korean Ramyeon in Traditional Pot](https://images.unsplash.com/photo-xxx?w=800)
+*A steaming bowl of Korean ramyeon - where comfort meets culture*
+```
+
+This renders as a centered, gray caption below the image.
+
+#### Character Notes
+For in-character tips, use italics in a separate paragraph:
+
+```markdown
+*Captain Ri's Note: In North Korea, resources are scarce. Every drop of water matters.*
 ```
 
 ---
 
-### 2단계: SEO 고급 최적화 ⚡ [중요]
+### Word Count & Quality Standards
 
-> 검색 순위 향상을 위한 기술적 SEO
+| Element | Requirement |
+|---------|-------------|
+| Total length | 1,500 - 2,500 words |
+| Images | 3-5 from Unsplash |
+| Internal links | 3-5 to related posts |
+| FAQ | 5-7 questions |
+| Reading time | 6-10 minutes |
 
-| # | 작업 | 상태 | 파일/위치 | 설명 |
-|---|------|------|-----------|------|
-| 2.1 | JSON-LD 스키마 추가 | ✅ | `BaseLayout.astro` | Article, Organization |
-| 2.2 | Canonical URL | ✅ | `BaseLayout.astro` | 중복 콘텐츠 방지 |
-| 2.3 | Twitter Card 메타 | ✅ | `BaseLayout.astro` | 소셜 공유 최적화 |
-| 2.4 | 브레드크럼 | ✅ | 글 페이지 | 홈 > 카테고리 > 글 |
-| 2.5 | 목차(TOC) | ✅ | 글 페이지 사이드 | 자동 생성 네비게이션 |
+### SEO Checklist
+- [ ] Drama name in title
+- [ ] Food name in title
+- [ ] Meta description under 160 chars
+- [ ] H2/H3 hierarchy correct
+- [ ] Alt text on all images
+- [ ] FAQ section for featured snippets
+- [ ] Internal links to related content
 
-**JSON-LD 스키마 구조**:
-```json
+---
+
+## Technical Setup
+
+### File Structure
+```
+kdrama-kitchen/
+├── public/
+│   ├── robots.txt
+│   ├── favicon.svg
+│   └── ads.txt
+├── src/
+│   ├── content/
+│   │   ├── config.ts
+│   │   └── posts/
+│   │       └── [slug].md
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   └── pages/
+│       ├── index.astro
+│       ├── posts/
+│       │   ├── index.astro
+│       │   └── [...slug].astro
+│       ├── category/[slug].astro
+│       ├── tag/[tag].astro
+│       ├── about.astro
+│       ├── contact.astro
+│       ├── privacy.astro
+│       ├── terms.astro
+│       ├── sitemap.xml.js
+│       └── rss.xml.js
+└── astro.config.mjs
+```
+
+### Content Schema
+```typescript
+// src/content/config.ts
 {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "글 제목",
-  "author": { "@type": "Person", "name": "슬림한끼" },
-  "datePublished": "2026-01-13",
-  "dateModified": "2026-01-13",
-  "image": "대표 이미지 URL",
-  "publisher": {
-    "@type": "Organization",
-    "name": "슬림한끼",
-    "logo": { "@type": "ImageObject", "url": "로고 URL" }
-  }
+  title: string,           // SEO title
+  description: string,     // Meta description
+  pubDate: string,         // YYYY-MM-DD
+  updatedDate?: string,    // Last modified
+  category: string,        // Drama genre
+  tags: string[],          // Keywords
+  image: string,           // Hero image URL
+  author?: string          // Default: "K-Drama Kitchen"
 }
 ```
 
 ---
 
-### 3단계: 콘텐츠 신뢰도 향상 📈 [권장]
+## Current Status
 
-> E-E-A-T (경험, 전문성, 권위, 신뢰) 강화
+### Completed ✅
+- [x] Site structure (all pages)
+- [x] SEO basics (sitemap, robots.txt, meta tags)
+- [x] JSON-LD Schema
+- [x] Search functionality (Fuse.js)
+- [x] Responsive design
+- [x] English UI conversion
+- [x] Domain configuration
 
-| # | 작업 | 상태 | 파일/위치 | 설명 |
-|---|------|------|-----------|------|
-| 3.1 | 작성자 프로필 섹션 | ✅ | 글 페이지 상단/하단 | 이름, 소개, 이미지 |
-| 3.2 | 최종 수정일 표시 | ✅ | 글 메타데이터 | 스키마 추가 완료 |
-| 3.3 | 읽기 시간 표시 | ✅ | 글 헤더 | "약 N분 소요" |
-| 3.4 | 건강 고지문 | ✅ | 글 하단 | 전문가 상담 권장 문구 |
-| 3.5 | 콘텐츠 스키마 확장 | ✅ | `content/config.ts` | author, updatedDate 필드 |
+### In Progress 🔄
+- [ ] Color palette refinement
+- [ ] Content creation (drama recipes)
 
-**작성자 프로필 예시**:
+### Pending ⏳
+- [ ] AdSense integration (after approval)
+- [ ] Social media accounts
+- [ ] More content (target: 30 posts)
+
+---
+
+## Quick Commands
+
+### Create New Post
 ```
-┌─────────────────────────────────────┐
-│ 👤 슬림한끼                          │
-│ 다이어트 식단 큐레이터               │
-│ "다이어트 정보, 보기 쉽게 정리했습니다" │
-└─────────────────────────────────────┘
+Write a new K-Drama Kitchen article about [DRAMA NAME] [FOOD NAME]
 ```
 
-**건강 고지문**:
+### Review Content
 ```
-⚠️ 본 콘텐츠는 정보 제공 목적이며, 의학적 조언을 대체하지 않습니다.
-개인의 건강 상태에 따라 전문가와 상담 후 식단을 조절하세요.
+Review [URL] for SEO and magazine style quality
+```
+
+### Check Issues
+```
+Check for bugs and issues across the site
 ```
 
 ---
 
-### 4단계: 사용자 경험 개선 🎨 [선택]
+## Important Notes
 
-> 사이트 이용 편의성 향상
+### Image Sources
+- Use Unsplash for all images
+- Format: `https://images.unsplash.com/photo-xxx?w=800`
+- Always verify images exist and match content
 
-| # | 작업 | 상태 | 파일/위치 | 설명 |
-|---|------|------|-----------|------|
-| 4.1 | 소셜 공유 버튼 | ✅ | `BaseLayout.astro` | 카카오스토리, X, 페이스북, 링크복사 |
-| 4.2 | "맨 위로" 버튼 | ✅ | `BaseLayout.astro` | 스크롤 시 우측 하단 표시 |
+### Internal Linking Strategy
+- Link to related drama recipes
+- Link to same-category posts
+- Link to culture/guide posts when relevant
 
-**카카오톡 공유 참고**:
-- 현재: 카카오스토리 공유 (SDK 불필요)
-- 배포 후: 카카오톡 직접 공유 추가 예정 (Kakao JavaScript SDK 등록 필요)
-
----
-
-### 5단계: 정리 및 최적화 🧹 [정리]
-
-> 불필요한 요소 제거 및 정돈
-
-| # | 작업 | 상태 | 파일/위치 | 설명 |
-|---|------|------|-----------|------|
-| 5.1 | 뉴스레터 폼 처리 | ✅ | 사이드바 | 제거 완료 |
-| 5.2 | 푸터 파트너 섹션 | ✅ | `BaseLayout.astro` | /contact로 연결 |
-| 5.3 | 발행일 다양화 | ✅ | 30개 글 | 2025-12-15 ~ 2026-01-13 분산 |
-| 5.4 | 사이드바 인기글 | ✅ | 메인 페이지 | "추천 글"로 변경 |
-| 5.5 | 플레이스홀더 링크 제거 | ✅ | 전체 | 모두 정리 완료 |
-| 5.6 | Unsplash 이미지 검증 | ✅ | 15개 글 (45+ 이미지) | 404/내용 불일치 수정 |
-
-**이미지 검증 결과** (2026-01-14):
-```
-카테고리별 검증 완료:
-├── 저칼로리 (6개 글) ............ ✅ 정상
-├── 단백질 식단 (4개 글) ......... ✅ 정상
-├── 밀프렙 (2개 글) .............. ✅ 정상
-├── 저칼로리 레시피 (1개 글) ..... ✅ 정상
-├── K-다이어트 (1개 글) .......... ✅ 4개 이미지 교체
-└── 다이어트 방법 (1개 글) ....... ✅ 정상
-
-수정된 파일:
-- 2025-12-15-sweet-potato-diet.md (고구마 다이어트)
-  - Hero: 감자 → 고구마 (photo-1680472628312-9ff2605ee718)
-  - 본문 3개: 404/프렌치프라이 → 구운 고구마 (photo-1520944052104-261c48c33a35)
-```
+### Monetization (Future)
+- Google AdSense: Pending approval
+- Affiliate links: Amazon, Korean grocery stores
+- No intrusive ads in content area
 
 ---
 
-## 작업 우선순위 매트릭스
+## Brand Assets
 
+### Logo Text
 ```
-            긴급함
-               ↑
-               │
-    ┌──────────┼──────────┐
-    │ 1단계    │ 2단계    │
-    │ 수익화   │ SEO      │
-    │ 활성화   │ 고급     │
-중요함 ────────┼──────────────→
-    │ 3단계    │ 4단계    │
-    │ 신뢰도   │ UX      │
-    │ 향상     │ 개선     │
-    └──────────┼──────────┘
-               │
-               ↓
+K-DRAMA
+KITCHEN
+Cook What You Watch
 ```
 
-**권장 순서**: 1단계 → 2단계 → 3단계 → 5단계 → 4단계
+### Social Profiles (To Create)
+- Pinterest: @kdramakitchen
+- Instagram: @kdramakitchen
+- X/Twitter: @kdramakitchen
 
 ---
 
-## 파일 구조
-
-```
-food-blog/
-├── public/
-│   ├── robots.txt        ✅ 완료
-│   ├── favicon.svg       ⏳ 추가 필요
-│   └── ads.txt           ⏳ 추가 필요
-├── src/
-│   ├── content/
-│   │   ├── config.ts     ⏳ 스키마 확장 필요
-│   │   └── posts/        ✅ 30개 글 완료
-│   ├── layouts/
-│   │   └── BaseLayout.astro  ⏳ SEO/광고 추가 필요
-│   └── pages/
-│       ├── index.astro       ✅ 완료
-│       ├── posts/
-│       │   ├── index.astro   ✅ 완료
-│       │   └── [...slug].astro ⏳ TOC/브레드크럼 추가 필요
-│       ├── category/[slug].astro ✅ 완료
-│       ├── tag/[tag].astro   ✅ 완료
-│       ├── about.astro       ✅ 완료
-│       ├── contact.astro     ✅ 완료
-│       ├── privacy.astro     ✅ 완료
-│       ├── sitemap.xml.js    ✅ 완료
-│       └── rss.xml.js        ✅ 완료
-└── astro.config.mjs          ✅ 완료
-```
-
----
-
-## 디자인 가이드
-
-### 컬러 팔레트
-```css
---bg-primary: #FAFAF8;      /* 따뜻한 백색 */
---bg-secondary: #F5F4F1;    /* 카드 배경 */
---text-primary: #1A1A1A;    /* 본문 */
---text-secondary: #6B6B6B;  /* 서브 텍스트 */
---accent: #A08060;          /* 포인트 (골드/브론즈) */
---border: #E8E6E3;          /* 테두리 */
-```
-
-### 디자인 원칙
-- 타임리스: 트렌드 타지 않는 클래식
-- 미니멀: 음식 사진이 돋보이게
-- 가독성: 텍스트 시인성 최우선
-
----
-
-## 글 작성 규칙
-
-### 트리거
-사용자가 **"새 글 작성"** 이라고 말하면 자동 생성
-
-### 필수 조건
-1. 분량: 5,000자 이상
-2. 이미지: Unsplash 3개 이상
-3. 내부 링크: 5개 이상
-4. FAQ: 9개
-5. 쿠팡 추천 제품: 3~4개
-
-### 글 구조
-```markdown
----
-title: "SEO 제목"
-description: "150자 메타 설명"
-pubDate: "YYYY-MM-DD"
-updatedDate: "YYYY-MM-DD"  # 새로 추가
-category: "카테고리"
-tags: ["태그1", "태그2"]
-image: "대표 이미지"
-author: "슬림한끼"  # 새로 추가
----
-
-[도입부 - 개인 경험담]
-
-## 본문 H2
-### 세부 H3
-
-[이미지 + 캡션]
-
-## FAQ
-### Q1. 질문?
-답변...
-
-## 추천 제품
-[쿠팡 파트너스 링크]
-
----
-⚠️ 건강 고지문
-```
-
----
-
-## 세션 시작 명령어
-
-```
-1단계 작업해줘
-```
-```
-2단계 작업해줘
-```
-```
-[N.N] 작업해줘  (예: 1.3 작업해줘)
-```
-```
-새 글 작성
-```
-
----
-
-## 수익화 정보
-
-### 쿠팡 파트너스
-- **파트너 ID**: AF2391197
-- **링크 형식**: `https://www.coupang.com/np/search?q=[키워드]&channel=user&aid=AF2391197`
-- **현재 상태**: 스크립트 완료, 플레이스홀더 링크 교체 필요
-
-### Google AdSense
-- **상태**: 미연동
-- **필요 작업**: ads.txt 생성, 광고 코드 삽입
-
-### Google Analytics
-- **상태**: 미연동
-- **필요 작업**: GA4 측정 ID 발급 후 코드 삽입
-
----
-
-## 진행 상황 요약
-
-| 영역 | 완료 | 남음 | 진행률 |
-|------|------|------|--------|
-| 콘텐츠 | 30개 | 0개 | 100% |
-| 페이지 | 8개 | 0개 | 100% |
-| SEO 기본 | 6개 | 0개 | 100% |
-| SEO 고급 | 5개 | 0개 | 100% |
-| 수익화 | 3개 | 2개 | 60% |
-| 신뢰도 | 5개 | 0개 | 100% |
-| 정리 | 6개 | 0개 | 100% |
-| UX | 2개 | 0개 | 100% |
-| **전체** | **65개** | **2개** | **97%** |
-
-### 남은 작업 (수익화 신청 후)
-- [ ] 1.1 ads.txt (AdSense 게시자 ID 필요)
-- [ ] 1.3 AdSense 광고 블록 (승인 후)
+*This guide defines the K-Drama Kitchen brand and content standards. All content should follow these guidelines to maintain consistency and quality.*
