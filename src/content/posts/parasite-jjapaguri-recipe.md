@@ -102,7 +102,17 @@ Transfer to a bowl. Garnish with green onions and sesame seeds. Eat immediatelyâ
 
 ### Video Tutorial
 
-Search "Maangchi jjapaguri" or "Parasite ram-don recipe" on YouTube for visual guides demonstrating the proper technique and timing.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/ZsTXzO-tk8M"
+  title="Jjapaguri with steak (Ram-don from Parasite) by Maangchi"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [Maangchi](https://www.youtube.com/@Maangchi) - the legendary Korean cooking YouTuber*
 
 ---
 

@@ -133,7 +133,17 @@ Serve at room temperature. To eat: take one crepe, add desired fillings, roll, a
 
 ### Video Tutorial
 
-Search "Korean Bapsang gujeolpan" on YouTube for a detailed visual guide to preparing each component.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/C96i1IRThzA"
+  title="구절판 레시피 (Gujeolpan by W TABLE)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [우리의식탁 W TABLE](https://www.youtube.com/@wtable6077) - Korea's popular cooking channel*
 
 ---
 

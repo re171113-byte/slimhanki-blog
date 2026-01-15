@@ -119,7 +119,17 @@ For yangnyeom or soy-garlic style: Toss hot chicken immediately in warm sauce. F
 
 ### Video Tutorial
 
-Search "Maangchi Korean fried chicken" on YouTube for a detailed visual guide on the double-fry technique.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/2HZO-YNHFPk"
+  title="백종원의 후라이드 & 양념치킨 레시피 (Korean Fried Chicken by Paik Jong Won)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [백종원 PAIK JONG WON](https://www.youtube.com/@paik_jongwon) - Korea's most famous chef (3.3M views)*
 
 ---
 

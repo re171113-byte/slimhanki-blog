@@ -90,7 +90,17 @@ Add crumbled seaweed and sesame seeds if desired. Eat immediately—gyeran-bap d
 
 ### Video Tutorial
 
-Search "Korean gyeran bap recipe" or "Korean egg rice" on YouTube for visual guides showing the mixing technique.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/01snsHZK6Ns"
+  title="백종원의 초간단 햄 계란밥 (Simple Egg Rice by Paik Jong Won)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [백종원 PAIK JONG WON](https://www.youtube.com/@paik_jongwon) - Korea's most famous chef*
 
 ---
 

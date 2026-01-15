@@ -94,7 +94,17 @@ When rice cakes are soft and chewy (not mushy), add green onions. Stir 30 second
 
 ### Video Tutorial
 
-Search "Maangchi tteokbokki" on YouTube for a detailed visual guide on achieving the perfect texture and sauce consistency.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/t4Es8mwdYlE"
+  title="백종원의 떡볶이 레시피 (Tteokbokki by Paik Jong Won)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [백종원 PAIK JONG WON](https://www.youtube.com/@백종원PAIK) - Korea's most famous chef (14M+ views)*
 
 ---
 

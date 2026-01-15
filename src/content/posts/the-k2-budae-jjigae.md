@@ -101,7 +101,17 @@ Lay American cheese slices on top (don't stir—let them melt). Optionally crack
 
 ### Video Tutorial
 
-Search "Maangchi budae jjigae" or "Korean Bapsang army stew" on YouTube for detailed visual guides.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/8uwmFQH614M"
+  title="백종원의 부대찌개 레시피 (Budae Jjigae by Paik Jong Won)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [백종원 PAIK JONG WON](https://www.youtube.com/@백종원PAIK) - Korea's most famous chef*
 
 ---
 

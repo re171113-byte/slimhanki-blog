@@ -88,9 +88,19 @@ Remove from heat. Add chopped green onions. If using cheese, lay it over the noo
 
 **Important**: Do not transfer to a bowl. Eat directly from the pot—this is the Korean way.
 
-### Video Reference
+### Video Tutorial
 
-For a visual guide to Korean ramyeon technique, search "Maangchi ramyeon" on YouTube. Her tutorial demonstrates the traditional method and timing.
+<iframe
+  src="https://www.youtube-nocookie.com/embed/Jj4oB1LW9Z8"
+  title="백종원의 스페셜 라면 (Paik Jong Won's Special Ramen)"
+  loading="lazy"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+  style="width: 100%; aspect-ratio: 16/9;">
+</iframe>
+
+*Video by [백종원 PAIK JONG WON](https://www.youtube.com/@paik_jongwon) - Korea's most famous chef (6.8M views)*
 
 ---
 
