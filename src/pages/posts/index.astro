@@ -61,7 +61,7 @@ const paginatedPosts = posts.slice(0, POSTS_PER_PAGE);
   .posts-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
   .posts-header p { color: var(--text-tertiary); }
   .posts-list { display: flex; flex-direction: column; gap: 24px; }
-  .post-item { background: var(--bg-card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .post-item { background: var(--bg-card); border-radius: 0; overflow: hidden; border: 1px solid #e0e0e0; transition: transform 0.2s, box-shadow 0.2s; }
   .post-item:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
   .post-item a { display: flex; gap: 24px; }
   .post-image { width: 280px; flex-shrink: 0; aspect-ratio: 16/10; overflow: hidden; }

@@ -77,43 +77,13 @@ const recommendedPosts = posts.slice(0, 5);
           {recommendedPosts.map((post, index) => (
             <a href={`/posts/${post.slug}`} class="picks-item">
               <span class="picks-number">{index + 1}</span>
+              <img class="picks-thumb" src={post.image.replace('w=600', 'w=100')} alt={post.title} loading="lazy" />
               <div class="picks-content">
                 <div class="picks-title">{post.title}</div>
                 <div class="picks-category">{post.category}</div>
               </div>
             </a>
           ))}
-        </div>
-      </div>
-
-      <!-- Browse by Topic -->
-      <div class="sidebar-section">
-        <h4 class="section-header">Browse by Topic</h4>
-        <div class="topics-list">
-          <a href="/tag/kimchi" class="topic-item">
-            <span class="topic-name">Kimchi Dishes</span>
-            <span class="topic-arrow">→</span>
-          </a>
-          <a href="/tag/ramyeon" class="topic-item">
-            <span class="topic-name">Ramyeon Recipes</span>
-            <span class="topic-arrow">→</span>
-          </a>
-          <a href="/tag/bibimbap" class="topic-item">
-            <span class="topic-name">Bibimbap</span>
-            <span class="topic-arrow">→</span>
-          </a>
-          <a href="/tag/tteokbokki" class="topic-item">
-            <span class="topic-name">Tteokbokki</span>
-            <span class="topic-arrow">→</span>
-          </a>
-          <a href="/tag/fried-chicken" class="topic-item">
-            <span class="topic-name">Fried Chicken</span>
-            <span class="topic-arrow">→</span>
-          </a>
-          <a href="/tag/street-food" class="topic-item">
-            <span class="topic-name">Street Food</span>
-            <span class="topic-arrow">→</span>
-          </a>
         </div>
       </div>
 
@@ -293,7 +263,7 @@ const recommendedPosts = posts.slice(0, 5);
     background: var(--bg-card);
     border-radius: 0;
     overflow: hidden;
-    border: none;
+    border: 1px solid #e0e0e0;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
@@ -402,6 +372,7 @@ const recommendedPosts = posts.slice(0, 5);
 
   .picks-item {
     display: flex;
+    align-items: center;
     gap: 12px;
     padding: 12px 0;
     border-bottom: 1px solid var(--border-light);
@@ -435,6 +406,14 @@ const recommendedPosts = posts.slice(0, 5);
     min-width: 24px;
   }
 
+  .picks-thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
   .picks-content {
     flex: 1;
     min-width: 0;
@@ -457,51 +436,6 @@ const recommendedPosts = posts.slice(0, 5);
     color: var(--text-tertiary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-  }
-
-  /* Browse by Topic */
-  .topics-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .topic-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-light);
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-
-  .topic-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .topic-item:first-child {
-    padding-top: 0;
-  }
-
-  .topic-item:hover {
-    color: var(--link-color, #326891);
-  }
-
-  .topic-item:hover .topic-arrow {
-    transform: translateX(3px);
-  }
-
-  .topic-name {
-    font-weight: 500;
-  }
-
-  .topic-arrow {
-    color: #AAAAAA;
-    font-size: 0.8rem;
-    transition: transform 0.2s;
   }
 
   /* ==================== CTA SECTION ==================== */
