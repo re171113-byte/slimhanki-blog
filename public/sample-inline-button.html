@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline Button CTA Sample - K-Drama Kitchen</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f5f5;
+      line-height: 1.8;
+      color: #1a1a1a;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #C62828;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin: 30px 0 15px;
+      color: #333;
+    }
+
+    /* ==================== Option 1: 인라인 버튼 ==================== */
+    .recipe-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .recipe-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .recipe-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+
+    .item-note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-left: 8px;
+    }
+
+    .buy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #FF9900;
+      color: #fff !important;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .buy-btn:hover {
+      background: #e68a00;
+    }
+
+    /* ==================== Option 2: 작은 텍스트 링크 ==================== */
+    .buy-link {
+      font-size: 0.8rem;
+      color: #C62828 !important;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .buy-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==================== Option 3: 아이콘 버튼 ==================== */
+    .buy-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #232F3E;
+      color: #FF9900 !important;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .buy-icon-btn:hover {
+      background: #1a242f;
+    }
+
+    .buy-icon-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ==================== 비교 섹션 ==================== */
+    .section-label {
+      background: #C62828;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .comparison-box {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* ==================== 모바일 ==================== */
+    @media (max-width: 500px) {
+      .recipe-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .buy-btn, .buy-link, .buy-icon-btn {
+        align-self: flex-end;
+      }
+    }
+
+    /* ==================== 추천 배지 ==================== */
+    .recommended {
+      position: relative;
+    }
+
+    .recommended::after {
+      content: "추천";
+      background: #4CAF50;
+      color: white;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>레시피 옆 버튼형 CTA 샘플</h2>
+
+  <!-- Option 1: 오렌지 버튼 -->
+  <div class="comparison-box recommended">
+    <span class="section-label">Option 1: 오렌지 버튼 (Amazon 색상)</span>
+
+    <h3>Ingredients</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">1 pack Korean ramyeon</span>
+          <span class="item-note">(Shin Ramyun recommended)</span>
+        </span>
+        <a href="#" class="buy-btn">Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">1 fresh egg</span>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">2 stalks green onion, chopped</span>
+      </li>
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean kimchi</span>
+          <span class="item-note">(optional)</span>
+        </span>
+        <a href="#" class="buy-btn">Amazon →</a>
+      </li>
+    </ul>
+
+    <h3>Equipment</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean ramen pot</span>
+          <span class="item-note">(양은냄비)</span>
+        </span>
+        <a href="#" class="buy-btn">Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Stainless steel chopsticks</span>
+        <a href="#" class="buy-btn">Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Lid</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Option 2: 텍스트 링크 -->
+  <div class="comparison-box">
+    <span class="section-label">Option 2: 텍스트 링크 (심플)</span>
+
+    <h3>Ingredients</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">1 pack Korean ramyeon</span>
+          <span class="item-note">(Shin Ramyun recommended)</span>
+        </span>
+        <a href="#" class="buy-link">Buy on Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">1 fresh egg</span>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">2 stalks green onion, chopped</span>
+      </li>
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean kimchi</span>
+          <span class="item-note">(optional)</span>
+        </span>
+        <a href="#" class="buy-link">Buy on Amazon →</a>
+      </li>
+    </ul>
+
+    <h3>Equipment</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean ramen pot</span>
+          <span class="item-note">(양은냄비)</span>
+        </span>
+        <a href="#" class="buy-link">Buy on Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Stainless steel chopsticks</span>
+        <a href="#" class="buy-link">Buy on Amazon →</a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Lid</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Option 3: Amazon 다크 버튼 -->
+  <div class="comparison-box">
+    <span class="section-label">Option 3: Amazon 다크 버튼</span>
+
+    <h3>Ingredients</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">1 pack Korean ramyeon</span>
+          <span class="item-note">(Shin Ramyun recommended)</span>
+        </span>
+        <a href="#" class="buy-icon-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+          Amazon
+        </a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">1 fresh egg</span>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">2 stalks green onion, chopped</span>
+      </li>
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean kimchi</span>
+          <span class="item-note">(optional)</span>
+        </span>
+        <a href="#" class="buy-icon-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+          Amazon
+        </a>
+      </li>
+    </ul>
+
+    <h3>Equipment</h3>
+    <ul class="recipe-list">
+      <li class="recipe-item">
+        <span>
+          <span class="item-name">Korean ramen pot</span>
+          <span class="item-note">(양은냄비)</span>
+        </span>
+        <a href="#" class="buy-icon-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+          Amazon
+        </a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Stainless steel chopsticks</span>
+        <a href="#" class="buy-icon-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+          Amazon
+        </a>
+      </li>
+      <li class="recipe-item">
+        <span class="item-name">Lid</span>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>
