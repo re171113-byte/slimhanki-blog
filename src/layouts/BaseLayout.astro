@@ -85,9 +85,6 @@ const jsonLd = type === 'article' ? {
   <!-- Pinterest Site Verification -->
   <meta name="p:domain_verify" content="a2a4cf73ff4fc7e6401aaa6abc2b3169" />
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9510318471579312" crossorigin="anonymous"></script>
-
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalUrl}>
 
@@ -112,41 +109,38 @@ const jsonLd = type === 'article' ? {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <title>{title}</title>
 
-  <!-- Google Fonts - Playfair Display for Magazine Logo -->
+  <!-- Google Fonts - Playfair Display (non-render-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"></noscript>
 
-  <!-- 이미지 프리커넥트 -->
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <!-- 프리커넥트 -->
+  <link rel="preconnect" href="https://upload.wikimedia.org">
+  <link rel="dns-prefetch" href="https://upload.wikimedia.org">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 
-  <!-- Google Analytics (지연 로드) -->
+  <!-- Google Analytics + AdSense (지연 로드) -->
   <script>
     window.addEventListener('load', function() {
-      var script = document.createElement('script');
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-CJ57RJSGHS';
-      script.async = true;
-      document.head.appendChild(script);
-      script.onload = function() {
+      // Google Analytics
+      var ga = document.createElement('script');
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-CJ57RJSGHS';
+      ga.async = true;
+      document.head.appendChild(ga);
+      ga.onload = function() {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-CJ57RJSGHS');
       };
-    });
-  </script>
-  <!-- Google AdSense (지연 로드) -->
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var script = document.createElement('script');
-        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9510318471579312';
-        script.async = true;
-        script.crossOrigin = 'anonymous';
-        document.head.appendChild(script);
-      }, 2000);
+      // Google AdSense
+      var ads = document.createElement('script');
+      ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9510318471579312';
+      ads.async = true;
+      ads.crossOrigin = 'anonymous';
+      document.head.appendChild(ads);
     });
   </script>
 </head>
@@ -274,7 +268,7 @@ const jsonLd = type === 'article' ? {
     })();
   </script>
 
-  <!-- Search Toggle & Search Functionality -->
+  <!-- Search (Desktop + Mobile, single Fuse.js import) -->
   <script type="module">
     import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.mjs';
 
@@ -292,7 +286,7 @@ const jsonLd = type === 'article' ? {
       });
     }
 
-    // Search overlay toggle
+    // === Desktop Search ===
     const searchToggle = document.getElementById('search-toggle');
     const searchOverlay = document.getElementById('search-overlay');
     const searchClose = document.getElementById('search-close');
@@ -311,27 +305,15 @@ const jsonLd = type === 'article' ? {
       if (searchResults) searchResults.innerHTML = '';
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && searchOverlay?.classList.contains('show')) {
-        searchOverlay.classList.remove('show');
-      }
-    });
-
     searchInput?.addEventListener('input', async (e) => {
       const query = e.target.value.trim();
-      if (!query) {
-        searchResults.innerHTML = '';
-        return;
-      }
-
+      if (!query) { searchResults.innerHTML = ''; return; }
       await initSearch();
       const results = fuse.search(query).slice(0, 6);
-
       if (results.length === 0) {
         searchResults.innerHTML = '<div class="search-no-result">No results found</div>';
         return;
       }
-
       searchResults.innerHTML = results.map(({ item }) => `
         <a href="/posts/${item.slug}" class="search-item">
           <img src="${item.image}" alt="${item.title}" referrerpolicy="no-referrer" />
@@ -342,12 +324,8 @@ const jsonLd = type === 'article' ? {
         </a>
       `).join('');
     });
-  </script>
 
-  <!-- 모바일 검색 오버레이 스크립트 -->
-  <script type="module">
-    import Fuse from 'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.mjs';
-
+    // === Mobile Search ===
     const mobileSearchIconBtn = document.getElementById('mobile-search-icon-btn');
     const mobileSearchOverlay = document.getElementById('mobile-search-overlay');
     const mobileSearchBackdrop = document.getElementById('mobile-search-backdrop');
@@ -355,20 +333,6 @@ const jsonLd = type === 'article' ? {
     const mobileSearchInput = document.getElementById('mobile-search-input');
     const mobileSearchResults = document.getElementById('mobile-search-results');
     const mobileSearchTags = document.querySelectorAll('.mobile-search-tag');
-
-    let fuse = null;
-    let searchData = null;
-
-    async function initMobileSearch() {
-      if (searchData) return;
-      const res = await fetch('/search.json');
-      searchData = await res.json();
-      fuse = new Fuse(searchData, {
-        keys: ['title', 'description', 'category', 'tags'],
-        threshold: 0.4,
-        includeScore: true
-      });
-    }
 
     function openMobileSearch() {
       mobileSearchOverlay?.classList.add('show');
@@ -386,18 +350,12 @@ const jsonLd = type === 'article' ? {
     }
 
     function performMobileSearch(query) {
-      if (!query || !fuse) {
-        if (mobileSearchResults) mobileSearchResults.innerHTML = '';
-        return;
-      }
-
+      if (!query || !fuse) { if (mobileSearchResults) mobileSearchResults.innerHTML = ''; return; }
       const results = fuse.search(query).slice(0, 8);
-
       if (results.length === 0) {
         mobileSearchResults.innerHTML = '<div style="padding: 20px; text-align: center; color: #888; font-size: 14px;">No results found</div>';
         return;
       }
-
       mobileSearchResults.innerHTML = results.map(({ item }) => `
         <a href="/posts/${item.slug}" class="mobile-search-result-item">
           <div class="mobile-search-result-title">${item.title}</div>
@@ -406,28 +364,25 @@ const jsonLd = type === 'article' ? {
       `).join('');
     }
 
-    mobileSearchIconBtn?.addEventListener('click', () => {
-      initMobileSearch();
-      openMobileSearch();
-    });
-
+    mobileSearchIconBtn?.addEventListener('click', () => { initSearch(); openMobileSearch(); });
     mobileSearchCloseBtn?.addEventListener('click', closeMobileSearch);
     mobileSearchBackdrop?.addEventListener('click', closeMobileSearch);
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMobileSearch();
-    });
-
-    mobileSearchInput?.addEventListener('input', (e) => {
-      performMobileSearch(e.target.value.trim());
-    });
-
+    mobileSearchInput?.addEventListener('input', (e) => { performMobileSearch(e.target.value.trim()); });
     mobileSearchTags.forEach(tag => {
       tag.addEventListener('click', () => {
         const query = tag.dataset.query;
         if (mobileSearchInput) mobileSearchInput.value = query;
         performMobileSearch(query);
       });
+    });
+
+    // === Shared Escape key ===
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (searchOverlay?.classList.contains('show')) searchOverlay.classList.remove('show');
+        closeMobileSearch();
+      }
     });
   </script>
   <!-- Back to Top Button -->
@@ -513,7 +468,7 @@ const jsonLd = type === 'article' ? {
     </div>
   </footer>
   <!-- Skimlinks -->
-  <script type="text/javascript" src="https://s.skimresources.com/js/297463X1784950.skimlinks.js"></script>
+  <script type="text/javascript" src="https://s.skimresources.com/js/297463X1784950.skimlinks.js" async></script>
 </body>
 </html>
 
